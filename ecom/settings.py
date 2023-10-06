@@ -48,7 +48,8 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-    'core'
+    'core',
+    'cart'
 ]
 
 DEFAULT_FORM_EMAIL = env('DEFAULT_FORM_EMAIL')
