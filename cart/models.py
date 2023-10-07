@@ -27,6 +27,17 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = 'Addresses'
 
+class ColourVariation(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+    
+class SizeVariation(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     title = models.CharField(max_length=150)
@@ -36,6 +47,8 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=False)
+    available_colours = models.ManyToManyField(ColourVariation)
+    available_sizes = models.ManyToManyField(SizeVariation)
 
     def __str__(self):
         return self.title
@@ -50,6 +63,8 @@ class OrderItem(models.Model):
     )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    colour = models.ForeignKey(ColourVariation, on_delete=models.CASCADE)
+    size = models.ForeignKey(SizeVariation, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.quantity} x {self.product.title}"
