@@ -144,6 +144,12 @@ MEDIA_ROOT = BASE_DIR/"media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+PAYPAL_CLIENT_ID=env('PAYPAL_SANDBOX_CLIENT_ID')
+PAYPAL__SECRET_KEY=env('PAYPAL_SANDBOX_SECRET_KEY')
+
+
+
 if DEBUG is False:
     SESSION_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
@@ -167,3 +173,6 @@ if DEBUG is False:
             'PORT': ''
         }
     }
+
+    PAYPAL_CLIENT_ID=env('PAYPAL_LIVE_CLIENT_ID')
+    PAYPAL__SECRET_KEY=env('PAYPAL_LIVE_SECRET_KEY')
