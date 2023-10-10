@@ -91,7 +91,8 @@ class RemoveFromCartView(generic.View):
         return redirect("cart:summary")
         
 
-class CheckoutView(generic.FormView):
+class CheckoutView(LoginRequiredMixin, generic.FormView):
+    login_url = '/accounts/login'
     template_name = 'cart/checkout.html'
     form_class = AddressForm
 
