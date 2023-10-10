@@ -6,8 +6,8 @@ from django.http import JsonResponse
 from typing import Any
 from django.views import generic
 # Create your views here.
-
-from .models import Product, OrderItem, Address, Payment
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Product, OrderItem, Address, Payment, Order
 from .utils import get_or_set_order_session
 from .forms import AddToCartForm, AddressForm
 from django.shortcuts import get_object_or_404, reverse, redirect
@@ -177,3 +177,7 @@ class ConfirmOrderView(generic.View):
 class ThankYouView(generic.TemplateView):
     template_name = 'cart/thanks.html'
 
+class OrderDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'order.html'
+    queryset = Order.objects.all()
+    context_object_name = 'order'
